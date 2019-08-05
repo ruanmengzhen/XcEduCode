@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+<!--配置持久化单元
+    name:名称
+    transaction-type:事务类型
+        RESOURCE_LOCAL:本地事务管理
+        JTA:分布式事务管理
+-->
+    <persistence-unit name="myJpa" transaction-type="RESOURCE_LOCAL">
+        <!--配置JPA规范的提供服务商-->
+        <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!--配置数据源-->
+        <properties>
+            <!--数据库驱动-->
+            <property name="javax.persistence.jdbc.drive" value="com.mysql.jdbc.Driver"/>
+            <!--数据库地址-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/jpa"/>
+            <!--数据库用户名-->
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <!--数据库密码-->
+            <property name="javax.persistence.jdbc.password" value="root"/>
+
+            <!--可先配置：jpa的提供者 jpa的提供者是hibernate 因此需要兼容hibernate-->
+            <!--显示sql-->
+            <property name="hibernate.show_sql" value="true"/>
+            <!--自动创建数据库
+                create：程序运行时创建数据库表，当有表时，先删除再创建
+                update：程序运行时创建数据库表，当有表时，不会创建表
+                none: 不会创建表，当数据库没有表时，用此值 会报错
+            -->
+            <property name="hibernate.hbm2dd1.auto" value="create"/>
+
+        </properties>
+
+
+    </persistence-unit>
+</persistence>

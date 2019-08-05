@@ -1,5 +1,5 @@
 //商品详细页（控制层） 
-app.controller('itemController', function ($scope) {
+app.controller('itemController', function ($scope,$http) {
     //数量操作
     $scope.addNum = function (x) {
         $scope.num = $scope.num + x;
@@ -71,6 +71,17 @@ app.controller('itemController', function ($scope) {
 	
 	 //将商品添加到购物车
     $scope.addCat=function () {
-        alert('skuid:'+$scope.sku.id);
+        //添加后应该跳转到购物车后台的添加页面，需携带商家id 和商品 数量
+        $http.get("http://localhost:9107/cart/addGoodsToCartList.do?itemId=" + $scope.sku.id + "&num="
+            + $scope.num,{'withCredentials':true}).success(
+            function (response) {
+                if (response.success){//添加成功 跳转到cart.html
+                    location.href="http://localhost:9107/cart.html"
+
+                } else {
+                    alert(response.message) ;
+                }
+            }
+        );
     }
 }); 
