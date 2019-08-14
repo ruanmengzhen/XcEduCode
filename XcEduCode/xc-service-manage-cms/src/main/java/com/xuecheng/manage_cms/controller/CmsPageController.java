@@ -7,6 +7,7 @@ import com.xuecheng.framework.domain.cms.response.CmsPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
+import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_cms.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,40 @@ public class CmsPageController implements CmsPageControllerApi {
     public CmsPageResult add(@RequestBody CmsPage cmsPage) {
 
         return pageService.add(cmsPage);
+    }
+
+    /**
+     * 根据页面id 查询页面信息,返回页面
+     * @param id
+     * @return
+     */
+    @Override
+    @GetMapping("/get/{id}")
+    public CmsPage findById(@PathVariable("id") String id) {
+        return pageService.findById(id);
+    }
+
+    /**
+     *修改页面信息
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PutMapping("/edit/{id}")
+    public CmsPageResult edit(@PathVariable("id")String id,@RequestBody CmsPage cmsPage) {
+
+        return pageService.update(id,cmsPage );
+    }
+
+
+    /**
+     * 删除页面
+     * @param id
+     * @return
+     */
+    @Override
+    @DeleteMapping("/del/{id}")
+    public ResponseResult delete(@PathVariable("id")String id) {
+        return pageService.delete(id);
     }
 }

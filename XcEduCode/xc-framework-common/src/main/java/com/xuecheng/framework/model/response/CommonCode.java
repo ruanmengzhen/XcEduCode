@@ -12,6 +12,11 @@ import lombok.ToString;
 @ToString
 public enum CommonCode implements ResultCode{
 
+
+    CMS_ADDPAGE_EXISTS(false,24001,"页面已存在！"),
+    NULL_POINTER(false,1005,"访问的对象为空"),//空指针异常类：NullPointerException
+    FILE_READ_WRITE(false,10004,"文件读写异常"),//输入输出异常：IOException
+    INVAILD_PARAMS(false,10003,"非法参数"),//非法参数异：HttpMessageNotReadableException
     SUCCESS(true,10000,"操作成功！"),
     FAIL(false,11111,"操作失败！"),
     UNAUTHENTICATED(false,10001,"此操作需要登陆系统！"),
